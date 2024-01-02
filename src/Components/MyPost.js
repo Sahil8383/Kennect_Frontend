@@ -34,7 +34,7 @@ const MyPost = () => {
   }, [])
 
 
-  if(!localStorage.getItem('userId')) {
+  if (!localStorage.getItem('userId')) {
     return (
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold">Please login to view posts</h1>
@@ -42,7 +42,7 @@ const MyPost = () => {
     )
   }
 
-  if(post.length === 0) {
+  if (post.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold">You have not posted anything yet</h1>
@@ -53,7 +53,15 @@ const MyPost = () => {
   return (
     <>
       <div className="flex flex-col items-center justify-center">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="
+          grid 
+          grid-cols-3
+          smt:grid-cols-1
+          mdt:grid-cols-2
+          lgt:grid-cols-3
+          xlt:grid-cols-3 
+          gap-4
+        ">
           {loading ? (
             <div className="flex flex-col items-center justify-center">
               <Spinner color="blue" size="large" />
