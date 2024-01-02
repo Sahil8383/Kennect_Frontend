@@ -148,33 +148,30 @@ const SinglePost = () => {
                                     />
                                 </div>
                             ) : (
-                                <div
-                                    className="flex flex-col overflow-y-auto max-h-[300px] "
-                                >
-                                    {
-                                        comments.map((comment) => (
-                                            <Card className="w-64 h-16 ">
-                                                <CardBody
-                                                    className="flex flex-row justify-between"
-                                                >
-                                                    <Typography variant="h6" color="blue-gray" className="">
-                                                        <Avatar
-                                                            src="https://beforeigosolutions.com/wp-content/uploads/2021/12/dummy-profile-pic-300x300-1.png"
-                                                            alt="avatar"
-                                                            size="xs"
-                                                            withBorder={true}
-                                                        /> {comment.made_by}
+                                <div className="flex flex-col overflow-y-auto max-h-[300px]">
+                                    {comments.map((comment, index) => (
+                                        <Card key={index} className="w-full mb-4 p-4 rounded-md bg-blue-gray-100">
+                                            <CardBody className="flex flex-row justify-between">
+                                                <div className="flex items-center">
+                                                    <Avatar
+                                                        src="https://beforeigosolutions.com/wp-content/uploads/2021/12/dummy-profile-pic-300x300-1.png"
+                                                        alt="avatar"
+                                                        size="xs"
+                                                        withBorder={true}
+                                                        className="mr-2"
+                                                    />
+                                                    <Typography variant="h6" color="blue-gray">
+                                                        {comment.made_by}
                                                     </Typography>
-                                                    <Typography>
-                                                        {
-                                                            comment.content
-                                                        }
-                                                    </Typography>
-                                                </CardBody>
-                                            </Card>
-                                        ))
-                                    }
+                                                </div>
+                                                <Typography className="ml-4">
+                                                    {comment.content}
+                                                </Typography>
+                                            </CardBody>
+                                        </Card>
+                                    ))}
                                 </div>
+
                             )
                         }
                     </div>
