@@ -5,6 +5,7 @@ import {
     Input,
     Spinner
 } from "@material-tailwind/react";
+import API_BASE_URL from '../config';
 
 const Posts = () => {
     const userId = localStorage.getItem('userId')
@@ -16,7 +17,7 @@ const Posts = () => {
 
     const fetchPosts = async () => {
         setLoading(true)
-        const response = await fetch('http://localhost:4000/api/posts')
+        const response = await fetch(`${API_BASE_URL}/posts`)
         const data = await response.json()
         setPosts(data)
         setLoading(false)
@@ -29,8 +30,13 @@ const Posts = () => {
     
     const handleSearch = async () => {
 
+        if(search === '') {
+            fetchPosts()
+            return
+        }
+
         setLoading(true);
-        const response = await fetch(`http://localhost:4000/api/searchedPosts?query=${search}`);
+        const response = await fetch(`${API_BASE_URL}/searchedPosts?query=${search}`);
         const data = await response.json();
         setPosts(data);
         setLoading(false);
@@ -66,12 +72,6 @@ const Posts = () => {
                         py-2
                     "
                 />
-                {/* <button
-                    className="bg-blue-500 text-white mt-4 px-4 py-2 rounded"
-                    onClick={handleSearch}
-                >
-                    Search
-                </button> */}
             </div>
 
             <div className="flex flex-col items-center justify-center">
@@ -88,9 +88,16 @@ const Posts = () => {
                     {
                         loading ? <div className="flex flex-col items-center justify-center">
                             <Spinner color="blue" size="large" />
-                        </div> : posts.map((post) => {
-                            return <PostCard madeBy={post.made_by} content={post.content} onClickFun={() => { navigate(`/posts/${post._id}`) }} key={post._id} />
-                        })
+                        </div> : Array.isArray(posts) ? posts.map((post) => (
+                            <PostCard
+                                madeBy={post.made_by}
+                                content={post.content}
+                                onClickFun={() => navigate(`/posts/${post._id}`)}
+                                key={post?._id}
+                            />
+                        )) : <div className="flex flex-col items-center justify-center">
+                            <h1 className="text-2xl font-bold">No posts found</h1>
+                        </div>
                     }
                 </div>
             </div>

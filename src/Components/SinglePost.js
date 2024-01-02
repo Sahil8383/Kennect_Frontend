@@ -15,6 +15,7 @@ import { IoMdSend } from "react-icons/io";
 import {
     useParams
 } from "react-router-dom";
+import API_BASE_URL from '../config';
 
 const SinglePost = () => {
 
@@ -26,7 +27,7 @@ const SinglePost = () => {
     const [loading, setLoading] = React.useState(false)
 
     const fetchPost = async () => {
-        const response = await fetch(`http://localhost:4000/api/post/${id}`)
+        const response = await fetch(`${API_BASE_URL}/post/${id}`)
         const data = await response.json()
         console.log(data)
         setPost(data)
@@ -38,7 +39,7 @@ const SinglePost = () => {
 
     const fetchComments = async () => {
         setLoading(true)
-        const response = await fetch(`http://localhost:4000/api/commentsData/${id}`)
+        const response = await fetch(`${API_BASE_URL}/commentsData/${id}`)
         const data = await response.json()
         console.log(data)
         setComments(data)
@@ -47,7 +48,7 @@ const SinglePost = () => {
 
     const postComment = async () => {
         setLoading(true)
-        const response = await fetch(`http://localhost:4000/api/posts`, {
+        const response = await fetch(`${API_BASE_URL}/posts`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

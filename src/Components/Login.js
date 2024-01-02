@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../Context/Context";
+import API_BASE_URL from "../config";
 
 export function Login() {
 
@@ -23,7 +24,7 @@ export function Login() {
     });
 
     const handleLogin = async () => {
-        const response = await fetch("http://localhost:4000/api/login", {
+        const response = await fetch(`${API_BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

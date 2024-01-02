@@ -4,6 +4,7 @@ import {
 } from "@material-tailwind/react";
 import { PostCard } from './Post';
 import { useNavigate } from 'react-router-dom'
+import API_BASE_URL from '../config';
 
 const MyPost = () => {
 
@@ -13,7 +14,7 @@ const MyPost = () => {
 
   const fetchPost = async () => {
     setLoading(true)
-    const response = await fetch(`http://localhost:4000/api/myPosts`, {
+    const response = await fetch(`${API_BASE_URL}/myPosts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

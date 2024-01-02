@@ -7,6 +7,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import API_BASE_URL from "../config";
 
 export function SignUp() {
 
@@ -18,7 +19,7 @@ export function SignUp() {
     });
 
     const handleSubmit = async () => {
-        const response = await fetch("http://localhost:4000/api/signup", {
+        const response = await fetch(`${API_BASE_URL}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,8 +27,9 @@ export function SignUp() {
             body: JSON.stringify(userInfo),
         });
         const data = await response.json();
+        localStorage.clear();
         localStorage.setItem("userId", data.userId);
-        if(response.status === 200) {
+        if(response.status === 201) {
             navigate("/");
         }
     }
